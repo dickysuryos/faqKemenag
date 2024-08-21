@@ -46,6 +46,8 @@
     </header>
     <?= $this->renderSection('content') ?>
  	 <?= $this->renderSection('faq') ?>
+ 	  <?= $this->renderSection('faqs') ?>
+ 	 
 <!-- 	<footer class="jumbotron jumbotron-fluid mt-5 mb-0">
 		<div class="container text-center">Copyright &copy <?= Date('Y') ?> CI News</div>
 	</footer> -->
