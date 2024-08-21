@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<?= $this->extend('layout/page_layout') ?>
+<?= $this->section('faqs') ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,3 +26,4 @@
 </div>
 </body>
 </html>
+<?= $this->endSection() ?>

@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class FaqModel extends Model
 {
-    protected $table = 'faqtable';
+    protected $table = 'faqTable';
     protected $primaryKey = 'id';
     protected $allowedFields = ['question', 'answer'];
 }
