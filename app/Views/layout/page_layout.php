@@ -38,7 +38,7 @@
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             					<li><a class="dropdown-item" href="/auth/register">Manage User</a></li>
             					<li><a class="dropdown-item" href="/pdf">Upload Doc</a></li>
-            					<li><a class="dropdown-item" href="#">Add Faq</a></li>
+            					<li><a class="dropdown-item" href="/faqs">Add Faq</a></li>
           					</ul>
 						</li>
                         <?php else: ?>
