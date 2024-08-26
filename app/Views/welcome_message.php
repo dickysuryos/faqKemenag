@@ -1,30 +1,39 @@
 <?= $this->extend('layout/page_layout') ?>
 <?= $this->section('content') ?>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 my-2 card">
-                <div class="card-body">
-                    <h5 class="h5">Codeigniter 4 Sudah Rilis!</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam perferendis commodi tenetur quos ducimus repellat nulla, nam magni. Commodi iusto ad harum voluptas exercitationem facere eos earum laboriosam excepturi quas?</p>
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-8">
+            <div class="row text-center">
+                <!-- Menu Item 1 -->
+                <div class="col-md-4 menu-item">
+                    <i class="bi bi-house-door-fill"></i>
+                    <div class="menu-item-title">Haji Dan Umrah</div>
                 </div>
-            </div>
-            <div class="col-md-12 my-2 card">
-                <div class="card-body">
-                    <h5 class="h5">Pengembangan Codeiginter 4 Tertunda</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam perferendis commodi tenetur quos ducimus repellat nulla, nam magni. Commodi iusto ad harum voluptas exercitationem facere eos earum laboriosam excepturi quas?</p>
+                <!-- Menu Item 2 -->
+                <div class="col-md-4 menu-item">
+                    <i class="bi bi-person-fill"></i>
+                    <div class="menu-item-title">Bimas Islam</div>
                 </div>
-            </div>
-            <div class="col-md-12 my-2 card">
-                <div class="card-body">
-                    <h5 class="h5">Wow, Ini 5 Startup yang Menggunakan Codeigniter</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam perferendis commodi tenetur quos ducimus repellat nulla, nam magni. Commodi iusto ad harum voluptas exercitationem facere eos earum laboriosam excepturi quas?</p>
+                <!-- Menu Item 3 -->
+                <div class="col-md-4 menu-item">
+                    <i class="bi bi-gear-fill"></i>
+                    <div class="menu-item-title">Nikah</div>
                 </div>
-            </div>
-            <div class="col-md-12 my-2 card">
-                <div class="card-body">
-                    <h5 class="h5">Codeigniter Ternyata Framework Terpopuler di Inodnesia</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam perferendis commodi tenetur quos ducimus repellat nulla, nam magni. Commodi iusto ad harum voluptas exercitationem facere eos earum laboriosam excepturi quas?</p>
+                <!-- Menu Item 4 -->
+                <div class="col-md-4 menu-item">
+                    <i class="bi bi-book-half"></i>
+                    <div class="menu-item-title">Pendidikan</div>
+                </div>
+                <!-- Menu Item 5 -->
+                <div class="col-md-4 menu-item">
+                    <i class="bi bi-cloud-download-fill"></i>
+                    <div class="menu-item-title">Publikasi</div>
+                </div>
+                <!-- Menu Item 6 -->
+                <div class="col-md-4 menu-item">
+                    <i class="bi bi-info-circle-fill"></i>
+                    <div class="menu-item-title">Statistik</div>
                 </div>
             </div>
         </div>
