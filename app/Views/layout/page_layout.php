@@ -31,11 +31,36 @@
 					</li>
 				</ul>
 			</div>
+			<ul class="navbar-nav list-group">
+                    <?php if (session()->get('logged_in')): ?>
+                        <?php if (session()->get('role') == 'admin'): ?>
+                            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin Dashboard</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            					<li><a class="dropdown-item" href="/auth/register">Manage User</a></li>
+            					<li><a class="dropdown-item" href="/pdf">Upload Doc</a></li>
+            					<li><a class="dropdown-item" href="#">Add Faq</a></li>
+          					</ul>
+						</li>
+                        <?php else: ?>
+                            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">User Dashboard</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            					<li><a class="dropdown-item" href="pdf">Upload Doc</a></li>
+            					<li><a class="dropdown-item" href="faqs">Add Faq</a></li>
+          					</ul>
+							  </li>
+							<?php endif; ?>
+                        <li class="nav-item"><a class="nav-link" href="/auth/logout">Logout (<?= session()->get('username') ?>)</a></li>
+                    <?php else: ?>
+                        <li class="nav-item"><a class="nav-link" href="/auth">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/auth/register">Register</a></li>
+                    <?php endif; ?>
+                </ul>
 		</div>
+		
 	</nav>
 
 
-	<header class="jumbotron jumbotron-fluid">
+	<!-- <header class="jumbotron jumbotron-fluid">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -43,10 +68,12 @@
 				</div>
 			</div>
 		</div>
-    </header>
+    </header> -->
     <?= $this->renderSection('content') ?>
  	 <?= $this->renderSection('faq') ?>
  	  <?= $this->renderSection('faqs') ?>
+	   <?= $this->renderSection('/auth/register') ?>
+<?= $this->renderSection('pdf') ?>
  	 
 <!-- 	<footer class="jumbotron jumbotron-fluid mt-5 mb-0">
 		<div class="container text-center">Copyright &copy <?= Date('Y') ?> CI News</div>
@@ -57,5 +84,8 @@
 	<script src="<?= base_url('js/bootstrap.min.js') ?>"></script>
 
 </body>
-
+<br>
+<footer>
+<div class="card-footer text-center">Made with 🩷</div>
+</footer>
 </html>
