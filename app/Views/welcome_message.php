@@ -1,6 +1,21 @@
 <?= $this->extend('layout/page_layout') ?>
 <?= $this->section('content') ?>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .menu-item {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .menu-item i {
+            font-size: 50px;
+            color: #007bff;
+        }
+        .menu-item-title {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+    </style>
 <div class="container mt-5">
     <div class="row justify-content-center align-items-center">
         <div class="col-md-8">
@@ -38,5 +53,5 @@
             </div>
         </div>
     </div>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <?= $this->endSection() ?>

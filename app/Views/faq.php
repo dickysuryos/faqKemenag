@@ -1,30 +1,6 @@
 <?= $this->extend('layout/page_layout') ?>
 <?= $this->section('faq') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- <script>
-        $(document).ready(function() {
-            // Handle the form submission
-            $('#searchForm').on('submit', function(e) {
-                // e.preventDefault(); // Prevent the default form submission
-
-                // Get the search term
-                var searchTerm = $('#search').val().trim();
-
-                if (searchTerm === '') {
-                    // If the search term is empty, show the default message
-                    $('#titleFaq').unhide
-                } else {
-                    // Perform the AJAX request
-                 $('#titleFaq2').text('Hasil Pencarian : ' .$searchTerm);
-                 $('#titleFaq').hide()
-                  $('#titleFaq2').unhide()
-                 
-
-                     
-                }
-            });
-        });
-    </script> -->
     <style>
         .menu-item {
             text-align: center;
@@ -70,45 +46,6 @@
 </div>
 <!-- End Of Search  -->
 
-
-
-<div class="container mt-5">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-md-8">
-            <div class="row text-center">
-                <!-- Menu Item 1 -->
-                <div class="col-md-4 menu-item">
-                    <i class="bi bi-house-door-fill"></i>
-                    <div class="menu-item-title">Haji Dan Umrah</div>
-                </div>
-                <!-- Menu Item 2 -->
-                <div class="col-md-4 menu-item">
-                    <i class="bi bi-person-fill"></i>
-                    <div class="menu-item-title">Bimas Islam</div>
-                </div>
-                <!-- Menu Item 3 -->
-                <div class="col-md-4 menu-item">
-                    <i class="bi bi-gear-fill"></i>
-                    <div class="menu-item-title">Nikah</div>
-                </div>
-                <!-- Menu Item 4 -->
-                <div class="col-md-4 menu-item">
-                    <i class="bi bi-book-half"></i>
-                    <div class="menu-item-title">Pendidikan</div>
-                </div>
-                <!-- Menu Item 5 -->
-                <div class="col-md-4 menu-item">
-                    <i class="bi bi-cloud-download-fill"></i>
-                    <div class="menu-item-title">Publikasi</div>
-                </div>
-                <!-- Menu Item 6 -->
-                <div class="col-md-4 menu-item">
-                    <i class="bi bi-info-circle-fill"></i>
-                    <div class="menu-item-title">Statistik</div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 
