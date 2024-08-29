@@ -9,10 +9,14 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="<?= base_url('css/bootstrap.min.css') ?>" />
 </head>
-
+<style> 
+	.navbar_custom {
+		background-color: #0D7C66;
+	}
+</style>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<nav class="navbar navbar-expand-lg navbar-dark navbar_custom">
 		<div class="container">
 			<a class="navbar-brand" href="<?= base_url() ?>">Home</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,13 +43,14 @@
             					<li><a class="dropdown-item" href="/auth/register">Manage User</a></li>
             					<li><a class="dropdown-item" href="/pdf">Upload Doc</a></li>
             					<li><a class="dropdown-item" href="/faqs">Add Faq</a></li>
+								<li><a class="dropdown-item" href="/category/categories">Add Category</a></li>
           					</ul>
 						</li>
                         <?php else: ?>
                             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">User Dashboard</a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            					<li><a class="dropdown-item" href="pdf">Upload Doc</a></li>
-            					<li><a class="dropdown-item" href="faqs">Add Faq</a></li>
+            					<li><a class="dropdown-item" href=<?= base_url('pdf') ?>>Upload Doc</a></li>
+            					<li><a class="dropdown-item" href=<?= base_url('faqs') ?>>Add Faq</a></li>
           					</ul>
 							  </li>
 							<?php endif; ?>
@@ -72,8 +77,10 @@
     <?= $this->renderSection('content') ?>
  	 <?= $this->renderSection('faq') ?>
  	  <?= $this->renderSection('faqs') ?>
+	   <?= $this->renderSection('/faqs/create') ?>
 	   <?= $this->renderSection('/auth/register') ?>
-<?= $this->renderSection('pdf') ?>
+	   <?= $this->renderSection('/category/categories') ?>
+	<?= $this->renderSection('pdf') ?>
  	 
 <!-- 	<footer class="jumbotron jumbotron-fluid mt-5 mb-0">
 		<div class="container text-center">Copyright &copy <?= Date('Y') ?> CI News</div>

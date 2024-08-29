@@ -8,47 +8,41 @@
         }
         .menu-item i {
             font-size: 50px;
-            color: #007bff;
         }
         .menu-item-title {
             margin-top: 10px;
-            font-size: 18px;
+            font-size: 11px;
             font-weight: 500;
+        }
+        .btn_custom {
+            border: none;
+        }
+        .icon_home {
+            color:#0D7C66;
+        }
+        .btn_custom:hover .icon_home {
+            color:#fff;
+        }
+        .icon_home -> #category {
+            color:#fff;
         }
     </style>
 <div class="container mt-5">
     <div class="row justify-content-center align-items-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="row text-center">
-                <!-- Menu Item 1 -->
-                <div class="col-md-4 menu-item">
-                    <i class="bi bi-house-door-fill"></i>
-                    <div class="menu-item-title">Haji Dan Umrah</div>
+            <?php foreach ($category as $category): ?>
+                <div class="col-md-3 menu-item">
+                <form id="searchForm" name="searchForm" action="<?= base_url('faq/getFaqByCat') ?>" method="get" class="d-flex icon_home">
+                <button class="btn btn-outline-success btn_custom" type="submit" name="category" value=<?= $category['name'] ?>  style="height: 150px;width: 200px;">    
+                <!-- <i class="" id="category" name="category" value="haji" method="get">    -->
+                    <img src="<?= base_url('/uploads/icon/' . $category['image']) ?>" alt="<?= $category['name'] ?>" width="100">
+                    <div id="category"  class="menu-item-title"><?= $category['name'] ?></div>
+                     </button>
+                     </form>
                 </div>
-                <!-- Menu Item 2 -->
-                <div class="col-md-4 menu-item">
-                    <i class="bi bi-person-fill"></i>
-                    <div class="menu-item-title">Bimas Islam</div>
-                </div>
-                <!-- Menu Item 3 -->
-                <div class="col-md-4 menu-item">
-                    <i class="bi bi-gear-fill"></i>
-                    <div class="menu-item-title">Nikah</div>
-                </div>
-                <!-- Menu Item 4 -->
-                <div class="col-md-4 menu-item">
-                    <i class="bi bi-book-half"></i>
-                    <div class="menu-item-title">Pendidikan</div>
-                </div>
-                <!-- Menu Item 5 -->
-                <div class="col-md-4 menu-item">
-                    <i class="bi bi-cloud-download-fill"></i>
-                    <div class="menu-item-title">Publikasi</div>
-                </div>
-                <!-- Menu Item 6 -->
-                <div class="col-md-4 menu-item">
-                    <i class="bi bi-info-circle-fill"></i>
-                    <div class="menu-item-title">Statistik</div>
+            <?php endforeach; ?>
+              
                 </div>
             </div>
         </div>

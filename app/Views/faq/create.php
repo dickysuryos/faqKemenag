@@ -1,3 +1,5 @@
+<?= $this->extend('layout/page_layout') ?>
+<?= $this->section('content') ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,9 +20,23 @@
             <label for="answer" class="form-label">Answer</label>
             <textarea class="form-control" id="answer" name="answer" rows="4" required></textarea>
         </div>
+        <div class="mb-3">
+        <label class="form-label" for="category">Category</label>
+                <select class="form-select" id="category" name="category">
+                    <option selected disabled>Select a category</option>
+                    <?php if (!empty($categories)): ?>
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <option value="">No categories available</option>
+                    <?php endif; ?>
+                </select>
+            </div>
         <button type="submit" class="btn btn-success">Save</button>
         <a href="<?= base_url('faqs') ?>" class="btn btn-secondary">Back</a>
     </form>
 </div>
 </body>
 </html>
+<?= $this->endSection() ?>

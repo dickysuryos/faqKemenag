@@ -4,63 +4,134 @@ namespace App\Controllers;
 
 use App\Models\FaqModel;
 use CodeIgniter\Controller;
-
+use App\Models\CategoryModel;
 class FaqController extends Controller
 {
     public function index()
     {
-        $faqModel = new FaqModel();
-        $data['faqs'] = $faqModel->findAll();
+        $session = session();
+        if ($session->get('logged_in')) {
+            $faqModel = new FaqModel();
+            $data['faqs'] = $faqModel->findAll();
 
-        return view('faq/index', $data);
+            return view('faq/index', $data);
+        } else {
+            return view('/auth/login');
+        }
     }
 
     public function create()
     {
-        return view('faq/create');
+        $session = session();
+        if ($session->get('logged_in')) {
+            $categoryModel = new CategoryModel();
+            $data['categories'] = $categoryModel->findAll();
+            return view('faq/create', $data);
+        } else {
+            return view('/auth/login');
+        }
     }
 
     public function store()
     {
-        $faqModel = new FaqModel();
+        $session = session();
+        if ($session->get('logged_in')) {
+            $faqModel = new FaqModel();
 
-        $data = [
-            'question' => $this->request->getVar('question'),
-            'answer'   => $this->request->getVar('answer'),
-        ];
+            $data = [
+                'question' => $this->request->getVar('question'),
+                'answer' => $this->request->getVar('answer'),
+            ];
 
-        $faqModel->insert($data);
+            $faqModel->insert($data);
 
-        return redirect()->to(base_url('faqs'));
+            return redirect()->to(base_url('faqs'));
+        } else {
+            return view('/auth/login');
+        }
     }
 
     public function edit($id)
     {
+        $session = session();
+        if ($session->get('logged_in')) {
         $faqModel = new FaqModel();
         $data['faq'] = $faqModel->find($id);
-
+        $categoryModel = new CategoryModel();
+        $data['categories'] = $categoryModel->findAll();
         return view('faq/edit', $data);
+        }
+        return view('/auth/login');
     }
 
     public function update($id)
     {
+        $session = session();
+        if ($session->get('logged_in')) {
         $faqModel = new FaqModel();
-
         $data = [
             'question' => $this->request->getVar('question'),
-            'answer'   => $this->request->getVar('answer'),
+            'answer' => $this->request->getVar('answer'),
+            'category' => $this->request->getVar('category'),
         ];
 
         $faqModel->update($id, $data);
 
         return redirect()->to(base_url('faqs'));
+     }
+     return view('/auth/login');
     }
 
     public function delete($id)
     {
+        $session = session();
+        if ($session->get('logged_in')) {
         $faqModel = new FaqModel();
         $faqModel->delete($id);
 
         return redirect()->to(base_url('faqs'));
+        }
+        return view('/auth/login');
+    }
+
+    public function getFaqByCat()
+    {
+        $session = session();
+        if ($session->get('logged_in')) {
+        $category = $this->request->getVar('category');
+        if (empty($category)) {
+            return redirect()->to(base_url('faqs'));
+        }
+
+        $faqModel = new FaqModel();
+        $data['faqs'] = $faqModel->orWhere('category', $category)
+            ->orLike('category', $category)
+            ->orHaving('category', $category)
+            ->orHavingLike('category', $category)
+            ->orHavingIn('category', explode(" ", $category))
+            ->findAll();
+
+        return view('faq', $data);
+        }
+        return view('/auth/login');
+    }
+    public function search()
+    {
+        $session = session();
+        if ($session->get('logged_in')) {
+            $search = $this->request->getVar('search');
+            if (empty($search)) {
+                return redirect()->to(base_url('/faqs'));
+            }
+
+            $faqModel = new FaqModel();
+            $data['faqs'] = $faqModel->like('question', $search)
+                ->orLike('answer', $search)
+                ->findAll();
+            return view('/faq/index', $data);
+        }
+        else {
+            return view('/auth/login');
+        }
     }
 }

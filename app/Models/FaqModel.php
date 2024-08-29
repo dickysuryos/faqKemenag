@@ -8,5 +8,5 @@ class FaqModel extends Model
 {
     protected $table = 'faqtable';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['question', 'answer'];
+    protected $allowedFields = ['question', 'answer','category'];
 }

@@ -70,7 +70,7 @@ public function store()
         return view('auth/register', ['validation' => $this->validator]);
     }
 
-    $model = new \App\Models\UserModel();
+    $model = new UserModel();
 
     $data = [
         'username' => $this->request->getVar('username'),
@@ -82,6 +82,6 @@ public function store()
 
     session()->setFlashdata('msg', 'Registration successful! You can now log in.');
     return redirect()->to('/auth');
-}
+    }
 
 }

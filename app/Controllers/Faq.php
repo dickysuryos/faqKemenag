@@ -8,10 +8,14 @@ class Faq extends BaseController
 {
     public function index()
     {
+    $session = session();
+    if ($session->get('logged_in')) {
        $faqModel = new FaqModel();
         $data['faqs'] = $faqModel->findAll();
-
         return view('faq', $data);
+    } else {
+        return view('/auth/login');
+        }
     }
 
     public function search() {
@@ -24,7 +28,6 @@ class Faq extends BaseController
     $data['faqs'] = $faqModel->like('question', $search)
                              ->orLike('answer', $search)
                              ->findAll();
-
     return view('faq', $data);
-}
+    }   
 }

@@ -20,6 +20,19 @@
             <label for="answer" class="form-label">Answer</label>
             <textarea class="form-control" id="answer" name="answer" rows="4" required><?= $faq['answer'] ?></textarea>
         </div>
+        <div class="mb-3">
+        <label class="form-label" for="category">Category</label>
+                <select class="form-select" id="category" name="category">
+                    <option selected disabled>Select a category</option>
+                    <?php if (!empty($categories)): ?>
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?= $category['name'] ?>"><?= $category['name'] ?></option>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <option value="">No categories available</option>
+                    <?php endif; ?>
+                </select>
+            </div>
         <button type="submit" class="btn btn-success">Update</button>
         <a href="<?= base_url('faqs') ?>" class="btn btn-secondary">Back</a>
     </form>

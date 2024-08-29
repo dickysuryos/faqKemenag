@@ -11,6 +11,14 @@
 </head>
 <body>
 <div class="container mt-5">
+    <div class="mb-3">
+      <form id="searchForm" name="searchForm" action="<?= base_url('faqs/searchFaq') ?>" method="get" class="d-flex">
+      <input id="search" name="search"class="form-control me-2" type="search" placeholder="Cari Dokumen" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</div>
+<div class="container mt-5">
     <h2>FAQ List</h2>
     <a href="<?= base_url('faqs/create') ?>" class="btn btn-primary mb-3">Add New FAQ</a>
     <table class="table table-bordered">
@@ -29,8 +37,10 @@
                     <td><?= $faq['id'] ?></td>
                     <td><?= $faq['question'] ?></td>
                     <td><?= $faq['answer'] ?></td>
+                    <td><?= $faq['category']?></td>
                     <td>
                         <a href="<?= base_url('faqs/edit/' . $faq['id']) ?>" class="btn btn-warning btn-sm">Edit</a>
+                       <br>
                         <a href="<?= base_url('faqs/delete/' . $faq['id']) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
                     </td>
                 </tr>

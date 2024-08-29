@@ -14,8 +14,16 @@ $routes->get('faqs/edit/(:num)', 'FaqController::edit/$1');
 $routes->post('faqs/update/(:num)', 'FaqController::update/$1');
 $routes->get('faqs/delete/(:num)', 'FaqController::delete/$1');
 $routes->get('faq/search', 'Faq::search');
+$routes->get('faqs/searchFaq', 'FaqController::search');
+$routes->get('faq/getFaqByCat', 'FaqController::getFaqByCat');
+
 $routes->get('/pdf', 'PdfController::index');
 $routes->post('/pdf/upload', 'PdfController::upload');
+$routes->get('pdf/delete/(:num)','PdfController::delete/$1');
+$routes->get('pdf/edit/(:num)','PdfController::edit/$1');
+$routes->get('pdf/detail/(:num)','PdfController::detail/$1');
+$routes->post('pdf/update/(:num)','PdfController::update/$1');
+$routes->get('/pdf/search', 'PdfController::search');
 // Auth
 $routes->get('/auth', 'Auth::index');
 $routes->post('/auth/login', 'Auth::login');
@@ -27,3 +35,10 @@ $routes->post('/auth/store', 'Auth::store');
 $routes->get('/admin/dashboard', 'Admin::dashboard', ['filter' => 'auth:admin']);
 $routes->get('/user/dashboard', 'User::dashboard', ['filter' => 'auth:user']);
 
+// categories
+
+$routes->get('/category/categories', 'CategoryController::index');
+$routes->post('/category/update/(:num)', 'CategoryController::update/$1');
+$routes->get('/category/edit/(:num)', 'CategoryController::edit/$1');
+$routes->post('/category/create', 'CategoryController::create');
+$routes->get('/category/delete/(:num)', 'CategoryController::delete/$1');
