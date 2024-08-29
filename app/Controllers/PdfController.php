@@ -13,12 +13,16 @@ class PdfController extends Controller
         if (session()->get('role') == 'admin'):
         $pdfModel = new PdfModel();
         $data['pdfs'] = $pdfModel->findAll();
+        $categoryModel = new CategoryModel();
+        $data['categories'] = $categoryModel->findAll();   
         return view('/pdf/pdf_list', $data);
         else:
             $user = (session()->get('id'));
             if (empty($user)) {
                 return redirect()->to(base_url('/auth'));
             }
+            $categoryModel = new CategoryModel();
+            $data['categories'] = $categoryModel->findAll();   
             $pdfModel = new PdfModel();
             $data['pdfs'] = $pdfModel->where('created_by',$user)
                                     ->findAll();

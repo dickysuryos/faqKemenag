@@ -92,13 +92,16 @@
           <label for="desc" class="form-label"> Description</label>
           <input type="text" class="form-control" name="desc" id="desc" required>
           <br>
-          <select class="form-select form-select-lg mb-3" name="category" id="category">
-            <option value="KUA">KUA</option>
-            <option value="Haji & Umrah">Haji & Umrah</option>
-            <option value="Nikah">Nikah</option>
-            <option value="Bimas">Bimas</option>
-            <option value="Pendidikan">Pendidikan</option>
-          </select>
+          <select class="form-select" id="category" name="category">
+                    <option selected disabled>Select a category</option>
+                    <?php if (!empty($categories)): ?>
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <option value="">No categories available</option>
+                    <?php endif; ?>
+                </select>
           <br>
           <input type="file" name="pdf" required>
           <button type="submit" class="btn btn-primary">Upload</button>
