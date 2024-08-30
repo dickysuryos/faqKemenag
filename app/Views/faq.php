@@ -23,7 +23,7 @@
     <?php endif; ?>
       <form id="searchForm" name="searchForm" action="<?= base_url('faq/search') ?>" method="get" class="d-flex">
       <input id="search" name="search"class="form-control me-2" type="search" placeholder="Cari Sesuatu" aria-label="Search">
-      <button class="btn btn-outline-success" value=<?php if (!empty($category['name'])): $category['id']; endif; ?> name="category" id="category" type="submit">Search</button>
+      <button class="btn btn-outline-success" value= "<?= $category['id']?>" name="category" id="category" type="submit">Search</button>
     </form>
   </div>
 </div>

@@ -109,11 +109,8 @@ class FaqController extends Controller
         $faqModel = new FaqModel();
         
         $data['faqs'] = $faqModel->orWhere('category', $catModel->where('id',$category)->first()['name'])
-            ->orLike('category', $category)
-            ->orHaving('category', $category)
-            ->orHavingLike('category', $category)
-            ->orHavingIn('category', explode(" ", $category))
-            ->findAll();
+
+                                 ->findAll();
         $data['category'] = $catModel->where('id',$category)->first();
 
         return view('faq', $data);

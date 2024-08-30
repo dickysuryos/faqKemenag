@@ -8,31 +8,35 @@ class Faq extends BaseController
 {
     public function index()
     {
-    $session = session();
-    if ($session->get('logged_in')) {
-       $faqModel = new FaqModel();
-        $data['faqs'] = $faqModel->findAll();
-        return view('faq', $data);
-    } else {
-        return view('/auth/login');
+        $session = session();
+        if ($session->get('logged_in')) {
+            $faqModel = new FaqModel();
+            $data['faqs'] = $faqModel->findAll();
+            return view('faq', $data);
+        } else {
+            return view('/auth/login');
         }
     }
 
-    public function search() {
-    $search = $this->request->getVar('search');
-    $category = $this->request->getVar('category');
+    public function search()
+    {
+        $search = $this->request->getVar('search');
+        $category = $this->request->getVar('category');
+        if (empty($search) || empty($category)) {
+            return redirect()->to(base_url('faq'));
+        }
+        $catModel = new CategoryModel();
 
-    if (empty($search)) {
-        return redirect()->to(base_url('faq'));
+        $faqModel = new FaqModel();
+        $data['faqs'] = $faqModel
+            ->where('category', $catModel->where('id', $category)->first()['name'])
+            ->findAll();
+
+
+        $data['category'] = $catModel->where('id', $category)->first();
+        if (empty($data['category'])) {
+            return view('faq');
+        }
+        return view('faq', $data);
     }
-    $catModel = new CategoryModel();
-
-    $faqModel = new FaqModel();
-    $data['faqs'] = $faqModel
-                             ->where('category',$catModel->where('id',$category)->first()['name'])
-                             ->findAll();
-                             
-    $data['category'] = $catModel->where('id',$category)->first();
-    return view('faq', $data);
-    }   
 }

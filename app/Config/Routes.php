@@ -15,7 +15,7 @@ $routes->post('faqs/update/(:num)', 'FaqController::update/$1');
 $routes->get('faqs/delete/(:num)', 'FaqController::delete/$1');
 $routes->get('faq/search', 'Faq::search');
 $routes->get('faqs/searchFaq', 'FaqController::search');
-$routes->get('faq/getFaqByCat', 'FaqController::getFaqByCat');
+$routes->get('faqs/getFaqByCat', 'FaqController::getFaqByCat');
 
 $routes->get('/pdf', 'PdfController::index');
 $routes->get('/pdf/allList', 'PdfController::allList');
