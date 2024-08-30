@@ -37,6 +37,7 @@
         <a href="<?= base_url('faqs') ?>" class="btn btn-secondary">Back</a>
     </form>
 </div>
+
 </body>
 </html>
 <?= $this->endSection() ?>

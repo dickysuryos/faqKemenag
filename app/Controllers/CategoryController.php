@@ -60,20 +60,20 @@ class CategoryController extends BaseController
         if ($session->get('logged_in')) {
             $categoryModel = new CategoryModel();
             $validation = \Config\Services::validation();
-            $validation->setRules([
-                'name' => 'required',
-                'image' => 'uploaded[image]|max_size[image,2048]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/gif,image/png]',
-            ]);
+            // $validation->setRules([
+            //     'name' => 'required',
+            //     'image' => 'uploaded[image]|max_size[image,2048]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/gif,image/png]',
+            // ]);
 
-            if (!$validation->withRequest($this->request)->run()) {
-                return view('/category/create', ['validation' => $validation]);
-            }
+            // if (!$validation->withRequest($this->request)->run()) {
+            //     return view('/category/create', ['validation' => $validation]);
+            // }
 
             $file = $this->request->getFile('image');
 
             if ($file->isValid() && !$file->hasMoved()) {
                 $newName = $file->getRandomName();
-                $file->move(WRITEPATH . 'uploads', $newName);
+                $file->move('uploads/icon/', $newName);
 
                 $data = [
                     'name' => $this->request->getVar('name'),

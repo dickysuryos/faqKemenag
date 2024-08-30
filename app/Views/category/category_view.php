@@ -50,7 +50,7 @@
         <?php if (session()->getFlashdata('status')): ?>
           <p><?= session()->getFlashdata('status') ?></p>
         <?php endif; ?>
-        <form action="<?= base_url('/category/create') ?>" method="post">
+        <form action="<?= base_url('/category/create') ?>" method="post" enctype="multipart/form-data">
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" id="name" name="name" required>

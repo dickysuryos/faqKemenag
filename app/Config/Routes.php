@@ -18,12 +18,14 @@ $routes->get('faqs/searchFaq', 'FaqController::search');
 $routes->get('faq/getFaqByCat', 'FaqController::getFaqByCat');
 
 $routes->get('/pdf', 'PdfController::index');
+$routes->get('/pdf/allList', 'PdfController::allList');
 $routes->post('/pdf/upload', 'PdfController::upload');
-$routes->get('pdf/delete/(:num)','PdfController::delete/$1');
+$routes->get('/pdf/delete/(:num)','PdfController::delete/$1');
 $routes->get('pdf/edit/(:num)','PdfController::edit/$1');
 $routes->get('pdf/detail/(:num)','PdfController::detail/$1');
 $routes->post('pdf/update/(:num)','PdfController::update/$1');
 $routes->get('/pdf/search', 'PdfController::search');
+
 // Auth
 $routes->get('/auth', 'Auth::index');
 $routes->post('/auth/login', 'Auth::login');
@@ -42,3 +44,7 @@ $routes->post('/category/update/(:num)', 'CategoryController::update/$1');
 $routes->get('/category/edit/(:num)', 'CategoryController::edit/$1');
 $routes->post('/category/create', 'CategoryController::create');
 $routes->get('/category/delete/(:num)', 'CategoryController::delete/$1');
+
+// activity 
+
+$routes->post('/activity/create_activity','UserActivityController::create_activity');

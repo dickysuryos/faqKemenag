@@ -25,13 +25,10 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link" href="<?= base_url('about') ?>">About</a>
+						<a class="nav-link" href="<?= base_url('/pdf/allList') ?>">Document</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<?= base_url('contact') ?>">Contact</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="<?= base_url('faq') ?>">Faqs</a>
+						<a class="nav-link" href="<?= base_url('/faq') ?>">Faqs</a>
 					</li>
 				</ul>
 			</div>

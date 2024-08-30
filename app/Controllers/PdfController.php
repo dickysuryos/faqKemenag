@@ -86,7 +86,7 @@ class PdfController extends Controller
                 'category' => $this->request->getVar('title'),
             ];
             $pdfModel->save($data);
-            
+
             return redirect()->to(base_url('/pdf'))->with('status', 'PDF uploaded successfully!');
         }
 
@@ -95,6 +95,17 @@ class PdfController extends Controller
 
    public function searchPdfWithUser() {
        
+    }
+
+    public function delete($id) {
+        $session = session();
+        if ($session->get('logged_in')) {
+        $pdfModel = new PdfModel();
+        $pdfModel->delete($id);
+
+        return redirect()->to(base_url('/pdf'));
+        }
+        return view('/auth/login');
     }
 
 
@@ -110,4 +121,10 @@ class PdfController extends Controller
                                  ->findAll();
         return view('/pdf/pdf_list', $data);
         }   
+
+        public function allList() {
+            $model = new PdfModel();
+            $data['pdfs'] = $model->findAll();
+            return view('/pdf/allList', $data);
+        }
 }

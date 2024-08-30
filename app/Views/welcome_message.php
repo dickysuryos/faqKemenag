@@ -34,7 +34,7 @@
             <?php foreach ($category as $category): ?>
                 <div class="col-md-3 menu-item">
                 <form id="searchForm" name="searchForm" action="<?= base_url('faq/getFaqByCat') ?>" method="get" class="d-flex icon_home">
-                <button class="btn btn-outline-success btn_custom" type="submit" name="category" value=<?= $category['name'] ?>  style="height: 150px;width: 200px;">    
+                <button class="btn btn-outline-success btn_custom" type="submit" name="category" value=<?= $category['id'] ?>  style="height: 150px;width: 200px;">    
                 <!-- <i class="" id="category" name="category" value="haji" method="get">    -->
                     <img src="<?= base_url('/uploads/icon/' . $category['image']) ?>" alt="<?= $category['name'] ?>" width="100">
                     <div id="category"  class="menu-item-title"><?= $category['name'] ?></div>

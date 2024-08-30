@@ -18,9 +18,12 @@
     </style>
 <div class="container mt-5">
     <div class="mb-3">
+    <?php if (!empty($category['name'])): ?>
+    <h1> <?=$category['name']?> </h1>
+    <?php endif; ?>
       <form id="searchForm" name="searchForm" action="<?= base_url('faq/search') ?>" method="get" class="d-flex">
       <input id="search" name="search"class="form-control me-2" type="search" placeholder="Cari Sesuatu" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
+      <button class="btn btn-outline-success" value=<?php if (!empty($category['name'])): $category['id']; endif; ?> name="category" id="category" type="submit">Search</button>
     </form>
   </div>
 </div>

@@ -18,20 +18,7 @@
     </form>
   </div>
 </div>
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="index-tab" data-bs-toggle="tab" data-bs-target="#indexPdf" type="button"
-          role="tab" aria-controls="index" aria-selected="true">PDF List</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="upload-tab" data-bs-toggle="tab" data-bs-target="#uploadPdf" type="button"
-          role="tab" aria-controls="upload" aria-selected="false">Upload PDF</button>
-      </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="indexPdf" role="tabpanel" aria-labelledby="index-tab">
-        <h2>Uploaded PDFs by <?= session()->get('username') ?></h2>
-        <table class="table table-bordered">
+<table class="table table-bordered">
           <thead>
             <tr>
               <th>Title</th>
@@ -51,9 +38,6 @@
                 <?php if (session()->get('logged_in')): ?>
                   <?php if (session()->get('role') == 'admin'): ?>
                     <td>
-                      <a href="<?= base_url('pdf/edit/' . $pdf['id']) ?>" class="btn btn-warning btn-sm">Edit</a>
-                      <a href="<?= base_url('pdf/delete/' . $pdf['id']) ?>" class="btn btn-danger btn-sm"
-                        onclick="return confirm('Are you sure?')">Delete</a>
                       <label id="shareLink" data-link="<?= base_url('/pdf/detail/'. $pdf['id']) ?>" readonly invisible></label>
                       <button class="btn btn-primary btn-sm copy-button" id="copyButton">Share</button>
                       <!-- Toast -->
@@ -78,39 +62,7 @@
             <?php endforeach; ?>
           </tbody>
         </table>
-      </div>
-      <!-- end of pdf list -->
-      <div class="tab-pane fade" id="uploadPdf" role="tabpanel" aria-labelledby="upload-tab">
-        <h1>Upload PDF</h1>
-        <?php if (session()->getFlashdata('status')): ?>
-          <p><?= session()->getFlashdata('status') ?></p>
-        <?php endif; ?>
-        <form action="<?= base_url('/pdf/upload') ?>" method="post" enctype="multipart/form-data">
-          <label for="title" class="form-label"> Title</label>
-          <input type="text" class="form-control" name="title" id="title" required>
-          <br>
-          <label for="desc" class="form-label"> Description</label>
-          <input type="text" class="form-control" name="desc" id="desc" required>
-          <br>
-          <select class="form-select" id="category" name="category">
-                    <option selected disabled>Select a category</option>
-                    <?php if (!empty($categories)): ?>
-                        <?php foreach ($categories as $category): ?>
-                            <option value="<?= $category['name'] ?>"><?= $category['name'] ?></option>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <option value="">No categories available</option>
-                    <?php endif; ?>
-                </select>
-          <br>
-          <input type="file" name="pdf" required>
-          <button type="submit" class="btn btn-primary">Upload</button>
-          <a href="<?= base_url('/pdf') ?>" class="btn btn-secondary">Back</a>
-        </form>
-      </div>
     </div>
-    <!-- end of uploaded -->
-  </div>
   <!-- Bootstrap 5 JS and Popper.js -->
  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>

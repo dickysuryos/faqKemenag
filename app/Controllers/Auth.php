@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\CategoryModel;
 use App\Models\UserModel;
 use CodeIgniter\Controller;
 
@@ -21,7 +22,6 @@ class Auth extends Controller
         $password = $this->request->getVar('password');
         
         $user = $model->getUserByUsername($username);
-        
         if ($user) {
             if (password_verify($password, $user['password'])) {
                 $sessionData = [
@@ -53,35 +53,60 @@ class Auth extends Controller
         $session->destroy();
         return redirect()->to('/auth');
     }
-
     public function register()
 {
-    return view('auth/register');
+    $category = new CategoryModel();
+    $user = new UserModel();
+    $session = session();
+    $activeUser = $user->getUserByID($session->get('id'));
+    $data['user'] = $user->like('category_section',$activeUser['category_section'])
+                         ->findAll();
+    //  $data['user'] = $activeUser;
+    $data['categories'] = $category->findAll();   
+    return view('auth/register',$data);
+
 }
 public function store()
 {
+    $category = new CategoryModel();
+    $data['categories'] = $category->findAll(); 
     $validation = $this->validate([
         'username' => 'required|min_length[3]|is_unique[users.username]',
         'password' => 'required|min_length[5]',
+        'category' => 'required',
         'role' => 'required|in_list[admin,user]'
     ]);
 
     if (!$validation) {
-        return view('auth/register', ['validation' => $this->validator]);
+         
+        return view('auth/register', ['validation' => $this->validator,'categories' => $category->findAll()]);
     }
-
     $model = new UserModel();
-
-    $data = [
+    $datas = [
         'username' => $this->request->getVar('username'),
+        'category_section' => $this->request->getVar('category'),
         'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
         'role' => $this->request->getVar('role')
     ];
+    ;
+    
 
-    $model->save($data);
-
-    session()->setFlashdata('msg', 'Registration successful! You can now log in.');
-    return redirect()->to('/auth');
+    $model->save($datas);
+    $session = session();
+    
+    $activeUser = $model->getUserByID($session->get('id'));
+    $data['user'] = $model->like('category_section','haji dan umrah')
+                     ->findAll();
+    // session()->setFlashdata('msg', 'Registration successful! You can now log in.');
+       return view('/auth/register',$data);
+    //    return redirect()->to('/auth/register',$data);
     }
+
+    // public function getUserByCat() {
+    //     $user = (session()->get('category'));
+    //     $model = new UserModel();
+    //     $data = $model->where('category_section',$user)->findAll();
+    //     return view('auth/register',$data);
+    // }
 
 }
