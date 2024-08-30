@@ -32,6 +32,7 @@ $routes->post('/auth/login', 'Auth::login');
 $routes->get('/auth/logout', 'Auth::logout');
 $routes->get('/auth/register', 'Auth::register');
 $routes->post('/auth/store', 'Auth::store');
+$routes->get('/auth/delete/(:num)', 'Auth::delete/$1');
 
 // Define routes for different user roles
 $routes->get('/admin/dashboard', 'Admin::dashboard', ['filter' => 'auth:admin']);

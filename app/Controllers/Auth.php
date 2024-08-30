@@ -102,11 +102,15 @@ public function store()
     //    return redirect()->to('/auth/register',$data);
     }
 
-    // public function getUserByCat() {
-    //     $user = (session()->get('category'));
-    //     $model = new UserModel();
-    //     $data = $model->where('category_section',$user)->findAll();
-    //     return view('auth/register',$data);
-    // }
+    public function delete($id) {
+        $session = session();
+        if ($session->get('logged_in')) {
+            if ($session->get('role') === 'admin') { 
+            $userModel = new UserModel();
+            $userModel->delete($id);
+            return redirect()->to('/auth/register');
+            }
+        }
+    }
 
 }

@@ -80,9 +80,9 @@
                                 <?php if (session()->get('logged_in')): ?>
                                     <?php if (session()->get('role') == 'admin'): ?>
                                         <td>
-                                            <a href="<?= base_url('pdf/edit/' . $users['id']) ?>"
+                                            <a href="<?= base_url('auth/edit/' . $users['id']) ?>"
                                                 class="btn btn-warning btn-sm">Edit</a>
-                                            <a href="<?= base_url('pdf/delete/' . $users['id']) ?>" class="btn btn-danger btn-sm"
+                                            <a href="<?= base_url('/auth/delete/' . $users['id']) ?>" class="btn btn-danger btn-sm"
                                                 onclick="return confirm('Are you sure?')">Delete</a>
                                         </td>
                                     <?php endif; ?>
