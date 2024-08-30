@@ -22,20 +22,24 @@ class Faq extends BaseController
     {
         $search = $this->request->getVar('search');
         $category = $this->request->getVar('category');
-        if (empty($search) || empty($category)) {
+        if (empty($search)) {
             return redirect()->to(base_url('faq'));
         }
         $catModel = new CategoryModel();
-
         $faqModel = new FaqModel();
-        $data['faqs'] = $faqModel
+        if (!empty($category)) { 
+            $data['category'] = $catModel->where('id', $category)->first();
+            if (empty($data['category'])) {
+                return view('faq');
+            }
+            $data['faqs'] = $faqModel
             ->where('category', $catModel->where('id', $category)->first()['name'])
             ->findAll();
-
-
-        $data['category'] = $catModel->where('id', $category)->first();
-        if (empty($data['category'])) {
-            return view('faq');
+        } else {
+        $data['faqs'] = $faqModel
+            ->orLike('question',$search)
+            ->orLike('answer',$search)
+            ->findAll();
         }
         return view('faq', $data);
     }
