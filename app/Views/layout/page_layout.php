@@ -1,7 +1,9 @@
 <?php
+use App\Models\MessagingModel;
 use App\Models\UserModel;
 use WebSocket\Client;
 $user = null;
+$counter = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,39 +17,22 @@ $user = null;
 	<link rel="stylesheet" href="<?= base_url('css/bootstrap.min.css') ?>" />
 </head>
 <style>
+	.fab {
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		z-index: 1000;
+	}
+
+	.fab .badge {
+		position: absolute;
+		top: -10px;
+		right: -10px;
+	}
+
 	.navbar_custom {
 		background-color: #0D7C66;
 	}
-	.chat-container {
-            height: 50vh;
-            display: flex;
-            flex-direction: column;
-            background-color: #ece5dd;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-	.chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 10px;
-        }
-	.message {
-            max-width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 20px;
-        }
-
-        .message.sent {
-            background-color: #dcf8c6;
-            align-self: flex-end;
-        }
-
-        .message.received {
-            background-color: #ffffff;
-            align-self: flex-start;
-        }
 </style>
 
 <body>
@@ -97,8 +82,24 @@ $user = null;
 				<?php endif; ?>
 			</ul>
 		</div>
+		</nav>
+		<?php if (!empty($message)): ?>
+			<?php foreach ($message as $chat):
+				?>
 
-	</nav>
+				<?php if ($chat['created_by'] === session()->get('id')): ?>
+
+				<?php else:
+
+					?>
+					<?php if ($chat['isRead'] == 0):
+						$counter += 1;
+					endif; ?>
+				<?php endif ?>
+
+			<?php endforeach; ?>
+		<?php endif; ?>
+	
 
 
 	<!-- <header class="jumbotron jumbotron-fluid">
@@ -119,120 +120,90 @@ $user = null;
 	<?= $this->renderSection('pdf') ?>
 
 	<!-- Floating Action Button (FAB) -->
-	<button type="button" class="btn btn-primary btn-lg rounded-circle position-fixed"
-		style="bottom: 20px; right: 20px;" data-bs-toggle="modal" data-bs-target="#chatModal">
-		<i class="bi bi-chat-dots"></i>
-	</button>
-
-	<!-- Chat Modal -->
-	
-	<div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
-
-	<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content" >
-				<div class="modal-header">
-					<h5 class="modal-title" id="chatModalLabel">Chat</h5>
-					<!-- <input class="modal-title invisible" value="<?= session()->get('username');?>" name="userLabel" id="userLabel"><?= session()->get('username');?></> -->
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body chat-container">
-					<!-- Chat Messages -->
-					<div class="message chat-messages" id="messages" style="height: 100%; width:100%; overflow-y: auto;">
-						<!-- Messages will be appended here -->
-						<?php if (!empty($message)): ?>
-                            <?php foreach ($message as $chat): ?><br>
-								<?php if ($chat['created_by'] === session()->get('id')):?>
-									<div class="text-start message sent">
-									<?= session()->get('username') .' : ' . ' <br>' . $chat['message'] ?>
-									</div>
-								<?php else:?>
-									<?php if (empty($user['username'])): $user = new UserModel();$user = $user->getUserByID($chat['created_by']); endif;?>
-									<div class="text-end message received">
-									<?= $user['username'].'('.$user['id'].')'.' : ' . '<br>' . $chat['message'] ?>
-									</div>
-								<?php endif?>
-                               
-                            <?php endforeach; ?>
-							<?php endif;?>
-					</div>
-				</div>
-				<!-- <div class="modal-footer"> -->
-				<form class="row g-3" action="/messaging/store" method="post">	
-					<?php if (session()->get('role') == 'admin'): ?>
-					<div class="mb-3">
-					<input type="text" id="text" name="text"  style="width:80%;margin:10px;" placeholder="Type your message here">
-					<input type="text" id="userid" name="userid"  style="width:80%;margin:10px;" placeholder="send to userid">
-					<button id="submit" type="submit" value="POST" class="btn btn-primary">Send</button>
-					</div>
-						<?php else:?>
-				<div class="mb-3">
-					<input type="text" id="text" name="text"  style="width:80%;margin:10px;" placeholder="Type your message here">
-					<button id="submit" type="submit" value="POST" class="btn btn-primary">Send</button>
-					<input id="userid" name="userid" value="1" class="invisible" >
-					
-					</div>
-					<?php endif;?>
-				</form>
-				<!-- </div> -->
-				</div>
-			</div>
-		</div>
-		
-	</div>
+	<a type="button" class="btn btn-primary btn-lg rounded-circle fab" style="bottom: 20px; right: 20px;"
+		href="/messaging/index">
+		<i class="bi bi-chat-dots" value></i>
+		<span class="badge bg-danger" id="badgeCounter"><?= $counter ?></span>
+	</a>
 
 
 	<!-- Jquery dan Bootsrap JS -->
 	<script src="<?= base_url('js/jquery.min.js') ?>"></script>
 	<script src="<?= base_url('js/bootstrap.min.js') ?>"></script>
-	<script>
+	<!-- <script>
 		var conn = new WebSocket('ws://localhost:8282');
-
 		var client = {
 			user_id: <?php echo session()->get('id'); ?>,
 			user_name: <?php echo session()->get('id'); ?>,
+			counter: <?php echo $counter; ?>,
 			recipient_id: null,
 			type: 'socket',
-			token: null, 
+			token: null,
 			message: null
 		};
 
 		conn.onopen = function (e) {
 			conn.send(JSON.stringify(client));
+
 			$('#chatModalLabel').append('<span color="green"> Successfully connected as user ' + client.user_id + '</span><br>');
+			// $('#badgeCounter').append(client.counter)
 		};
 
 		conn.onmessage = function (e) {
 			var chatMessages = document.querySelector('.chat-messages');
 			var data = JSON.parse(e.data);
-			
+
 			if (data.message) {
-				$('#messages').append('<div class="text-end message received">'  + client.user_name + '(' + data.user_id + ')' + ' : ' + '<br>'+ data.message  + '</div>');
+				$('#messages').append('<div class="text-end message received">' + client.user_name + '(' + data.user_id + ')' + ' : ' + '<br>' + data.message + '</div>');
 			}
 			if (data.type === 'token') {
 				$('#token').html('JWT Token : ' + data.token);
 			}
 			chatMessages.innerHTML += $('#messages').val();
 			chatMessages.scrollTop = chatMessages.scrollHeight;
+			// $('#badgeCounter').appendTo(0,data.counter=+1)
 		};
 
 		$('#submit').click(function () {
 			send();
 		});
 
+		// $('#closeModal').click(function () {
+		// 	// <php foreach ($message as $chat):
+		// 	// 	if ($chat['sending_to'] == session()->get('id')):
+		// 	// 		$data = ['isRead' => 1];s
+		// 	// 		$model = new MessagingModel();
+		// 	// 		$model->update($chat['id'], $data);
+		// 	// 	endif;
+		// 	// endforeach;
+		// 	// ?>
+		// });
+
+		// const observedElement = document.querySelector('.chat-messages');
+
+		// const observer = new IntersectionObserver((entries) => {
+		// 	entries.forEach(entry => {
+		// 		if (entry.isIntersecting) {
+		// 			// console.log('Element has appeared in the viewport!');
+		// 			// alert('The element has appeared in the viewport!');
+
+		// 		}
+		// 	});
+		// });
+
 		function send() {
 			client.message = $('#text').val();
 			var chatMessages = document.querySelector('.chat-messages');
 			client.token = $('#token').text().split(': ')[1];
-			// client.recipient_id = 1;
 			client.type = 'chat';
 			if ($('#userid').val === '') {
 				client.recipient_id = 1;
 			} else {
-			client.recipient_id = $('#userid').val;
+				client.recipient_id = $('#userid').val;
 			}
 			$('#token').empty();
 			$('#recipient_id').empty();
-			$('#messages').append('<div class="text-start message sent">'   + ' : ' + '<br>' + client.message + '</div>' );
+			$('#messages').append('<div class="text-start message sent">' + ' : ' + '<br>' + client.message + '</div>');
 			chatMessages.innerHTML += $('#messages').val();
 			chatMessages.scrollTop = chatMessages.scrollHeight;
 			conn.send(JSON.stringify(client));
@@ -244,7 +215,7 @@ $user = null;
 				send(); // Call the sendMessage function
 			}
 		});
-	</script>
+	</script> -->
 </body>
 <br>
 <footer>

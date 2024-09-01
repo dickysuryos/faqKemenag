@@ -5,7 +5,7 @@ class MessagingModel extends Model {
     protected $table = 'messaging';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['created_by','message','sending_to'];
+    protected $allowedFields = ['created_by','message','sending_to','isRead'];
     
     protected $useTimestamps = true;
 

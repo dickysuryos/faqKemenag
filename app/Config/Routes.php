@@ -52,3 +52,5 @@ $routes->get('/category/delete/(:num)', 'CategoryController::delete/$1');
 
 $routes->post('/activity/create_activity','UserActivityController::create_activity');
 $routes->post('/messaging/store','MessagingController::store');
+
+$routes->get('/messaging/index' ,'MessagingController::index');
