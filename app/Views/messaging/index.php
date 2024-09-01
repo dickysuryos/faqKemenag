@@ -62,7 +62,7 @@ $session = session();
                                 ?><br>
                                 <?php if ($chat['created_by'] === session()->get('id')): ?>
 
-                                    <div class="text-start message sent">
+                                    <div class="text-end message received">
                                         <?= session()->get('username') . ' : ' . ' <br>' . $chat['message'] ?>
                                     </div>
 
@@ -79,7 +79,7 @@ $session = session();
                                         $user = new UserModel();
                                         $user = $user->getUserByID($chat['created_by']);
                                     endif; ?>
-                                    <div class="text-end message received">
+                                    <div class="text-start message sent">
                                         <?= $user['username'] . '(' . $user['id'] . ')' . ' : ' . '<br>' . $chat['message'] ?>
 
                                     </div>
