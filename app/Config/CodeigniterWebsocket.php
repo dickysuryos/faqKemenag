@@ -15,7 +15,7 @@ use CodeIgniter\Config\BaseConfig;
  */
 class CodeigniterWebsocket extends \Takielias\CodeigniterWebsocket\Config\CodeigniterWebsocket
 {
-    public $host = "10.0.3.29";
+    public $host = "0.0.0.0";
     public $port = 8080;
     public $timer = false;
     public $interval = 1;
