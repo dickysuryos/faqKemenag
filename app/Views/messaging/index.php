@@ -136,7 +136,7 @@ $session = session();
                         var data = JSON.parse(e.data);
 
                         if (data.message) {
-                            $('#messages').append('<div class="text-end message received">' + client.user_name + '(' + data.user_id + ')' + ' : ' + '<br>' + data.message + '</div>');
+                            $('#messages').append('<div class="text-start message sent">' + client.user_name + '(' + data.user_id + ')' + ' : ' + '<br>' + data.message + '</div>');
                         }
                         if (data.type === 'token') {
                             $('#token').html('JWT Token : ' + data.token);
