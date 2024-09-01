@@ -112,7 +112,7 @@ $session = session();
 
                 <script>
 
-                    var conn = new WebSocket('ws://0.0.0.0:8080');
+                    var conn = new WebSocket('ws://0.0.0.0:8081');
 
                     var client = {
                         user_id: <?= $session->get('id'); ?>,
