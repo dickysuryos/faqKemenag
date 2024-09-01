@@ -112,7 +112,7 @@ $session = session();
 
                 <script>
 
-                    var conn = new WebSocket('ws://tcp.psvitamampangstore');
+                    var conn = new WebSocket('ws://dev.psvitamampang.store');
 
                     var client = {
                         user_id: <?= $session->get('id'); ?>,
