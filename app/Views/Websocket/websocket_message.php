@@ -89,7 +89,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    var conn = new WebSocket('ws://localhost:8282');
+    var conn = new WebSocket('ws://dev.psvitamampang.store');
     var client = {
         user_id: <?php echo $user_id; ?>,
         recipient_id: null,
