@@ -15,7 +15,7 @@ use CodeIgniter\Config\BaseConfig;
  */
 class CodeigniterWebsocket extends \Takielias\CodeigniterWebsocket\Config\CodeigniterWebsocket
 {
-    public $host = "dev.psvitamampang.store";
+    public $host = "0.0.0.0";
     public $port = 8282;
     public $timer = false;
     public $interval = 1;

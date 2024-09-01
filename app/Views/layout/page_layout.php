@@ -185,7 +185,7 @@ $user = null;
 	<script src="<?= base_url('js/jquery.min.js') ?>"></script>
 	<script src="<?= base_url('js/bootstrap.min.js') ?>"></script>
 	<script>
-		var conn = new WebSocket('ws://dev.psvitamampang.store:8282');
+		var conn = new WebSocket('ws://localhost:8282');
 
 		var client = {
 			user_id: <?php echo session()->get('id'); ?>,
