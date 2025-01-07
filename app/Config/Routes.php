@@ -5,6 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+$routes->setAutoRoute(true);
+
 $routes->get('/', 'Home::index');
 $routes->get('/faq', 'Faq::index');
 $routes->get('faqs', 'FaqController::index');
@@ -49,3 +51,6 @@ $routes->get('/category/delete/(:num)', 'CategoryController::delete/$1');
 // activity 
 
 $routes->post('/activity/create_activity','UserActivityController::create_activity');
+$routes->post('/messaging/store','MessagingController::store');
+
+$routes->get('/messaging/index' ,'MessagingController::index');

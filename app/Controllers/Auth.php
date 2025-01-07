@@ -27,6 +27,7 @@ class Auth extends Controller
                 $sessionData = [
                     'id' => $user['id'],
                     'username' => $user['username'],
+                    'category' => $user['category_section'],
                     'role' => $user['role'],
                     'logged_in' => TRUE
                 ];
